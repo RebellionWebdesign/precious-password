@@ -1,6 +1,6 @@
 ## Here we need to import some modules we use
 import time ## Time is needed to to have delays for the greeter messages
-import requests ## Requests will handle the http-GET part of the app
+#import requests ## Requests will handle the http-GET part of the app
 
 def greeter():
     print("Hi and welcome to Precious Password!")
