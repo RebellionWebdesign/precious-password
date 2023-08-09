@@ -23,3 +23,5 @@ def greeter():
         print("Okay, no problem. Have a nice day!")
     else:
         print("Okay, let's go!")
+
+greeter()
