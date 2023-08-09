@@ -12,13 +12,13 @@ def greeter():
     print("- Check if your password is in the PWNED PASSWORD database")
     time.sleep(2)
     print("- Check if your password was hacked previously")
-    time.sleep("5")
+    time.sleep(5)
     greeter_input = input("Do you want to enter a password now (y/n)?\n")
 
     if greeter_input != "y":
         print("Sorry, you ned to enter y for yes or n for no")
     elif greeter_input != "n":
-        print("Sorry, you ned to enter y for yes or n for no")
+        print("Sorry, you need to enter y for yes or n for no")
     elif greeter_input == "n":
         print("Okay, no problem. Have a nice day!")
     else:
