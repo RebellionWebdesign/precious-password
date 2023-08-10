@@ -2,8 +2,6 @@
 import time ## Time is needed to to have delays for the greeter messages
 #import requests ## Requests will handle the http-GET part of the app
 
-
-
 def greeter():
     print("Hi and welcome to Precious Password!")
     time.sleep(5)
@@ -15,8 +13,6 @@ def greeter():
     time.sleep(2)
     print("- Check if your password was hacked previously")
     time.sleep(2)
-
-greeter()
 
 def greeter_input(*user_response):
     user_response = input("Do you want to enter a password now (y/n)?\n")
@@ -30,5 +26,6 @@ def greeter_input(*user_response):
         print("Please input y or n")
         greeter_input()
 
+greeter()
 greeter_input()
 
