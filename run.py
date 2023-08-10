@@ -7,7 +7,7 @@ import time ## Time is needed to to have delays for the greeter messages
 def greeter():
     print("Hi and welcome to Precious Password!")
     time.sleep(5)
-    print("With this app you can do the following:")
+    print("With this app you can do the following:\n")
     time.sleep(5)
     print("- Check if your password is secure")
     time.sleep(2)
