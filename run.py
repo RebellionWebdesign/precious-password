@@ -26,9 +26,9 @@ def greeter_input(*user_response):
     user_response = input("Do you want to enter a password now (y/n)?\n")
 
     if user_response == "y":
-        print("Works!")
+        print("Okay, let´s go!")
     elif user_response == "n":
-        print("Have anice day!")
+        print("Have a nice day!")
         exit()
     else:
         print("Please input y or n")
