@@ -19,10 +19,10 @@ def greeter():
     time.sleep(2)
     print("- Check if your password is in the PWNED PASSWORD database")
     time.sleep(2)
-    print("- Check if your password was hacked previously")
+    print("- Check if your password is commonly used")
     time.sleep(2)
 
-def greeter_input(*user_response):
+def greeter_input():
     user_response = input("Do you want to enter a password now (y/n)?\n")
 
     if user_response == "y":
