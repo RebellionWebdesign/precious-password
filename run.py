@@ -23,7 +23,7 @@ def greeter():
     print("- Check if your password is commonly used")
     time.sleep(2)
 
-def password_input(user_password):
+def password_input():
     user_password = input("Please choose a password to test: \n")
 
     if user_password == "":
