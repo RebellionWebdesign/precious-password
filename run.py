@@ -27,10 +27,6 @@ def main_menu():
 
 def main():
     ascii_banner()
-    print("Hi and welcome to Precious Password! This app was made to"
-          + " help you choosing a safe and secure password."
-          + "Check out the options below and choose what you want to"
-          + " do")
     main_menu()
 
 if __name__ == "__main__":
