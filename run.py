@@ -3,8 +3,14 @@ import pyfiglet
 from simple_term_menu import TerminalMenu
 import hashlib
 
+#Converts the passwords.txt file to a list
+common_passwords = open("passwords.txt", "r")
+common_passwords_data = common_passwords.read()
+common_passwords_data.split("\n")
+common_passwords.close()
 
-class PasswordCheck():
+# Class holding the password data
+class PasswordCheck:
     def __init__(self, pw_clean, pw_hash, pw_prefix, pw_strength,
                  pw_in_list):
         self.pw_clean = pw_clean
@@ -13,21 +19,14 @@ class PasswordCheck():
         self.pw_strength = pw_strength
         self.pw_in_list = pw_in_list
 
-def ascii_banner():
-    banner = pyfiglet.figlet_format("Precious Password",
-                                    font="digital",)
-    print(banner)
+#Instance of the class holding password data
+pwc_instance = PasswordCheck("", "", "", "", "")
 
-def main_menu():
-    options = ["Check password security", "Check database for password",
-               "Check if passwordis commonly used", "Quit"]
-    main_menu = TerminalMenu(options)
-    main_menu_index = main_menu.show()
-    print("You have selected {options[main_menu_index]}!")
+
+    
 
 def main():
-    ascii_banner()
-    main_menu()
+
 
 if __name__ == "__main__":
     main()
