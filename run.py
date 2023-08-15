@@ -30,7 +30,7 @@ def get_password():
         print("That's not a password. Try again.")
         get_password()
     else:
-        pwc_instance.pw_clean = user_password.upper()
+        pwc_instance.pw_clean = user_password
 
 def check_password_frequency():
     print("Checking password frequency...")
@@ -49,9 +49,10 @@ def hash_password():
     else:
         pwc_instance.pw_hash = hashlib.sha1(bytes(pwc_instance.pw_clean, "utf-8")).hexdigest().upper()
         pwc_instance.pw_prefix = pwc_instance.pw_hash[0:5]
+        pwc_instance.pw_suffix = pwc_instance.pw_hash[5:]
 
 def check_password_database():
-    request = requests.get("https://api.pwnedpasswords.com/range/" + pwc_instance.pw_prefix.upper())
+    request = requests.get("https://api.pwnedpasswords.com/range/" + pwc_instance.pw_prefix)
     
     if request.status_code != 200:
         print("Password doesnt seem to in the database")
@@ -60,13 +61,13 @@ def check_password_database():
         print(request.iter_lines())
         for hash in request.iter_lines():
             stripped_hash = str(hash).strip("b'")
-            strip_numbers = r":.*"
-            stripped_numbers = re.sub(strip_numbers, "", stripped_hash)
-            complete_hash = pwc_instance.pw_prefix + stripped_numbers.upper()
+            strip_occur = r":.*"
+            stripped_numbers = re.sub(strip_occur, "", stripped_hash)
+            complete_hash = stripped_numbers.upper()
             complete_hash.strip()
             hash_list = complete_hash.split("\n")
 
-            if pwc_instance.pw_hash in hash_list:
+            if pwc_instance.pw_suffix in hash_list:
                 print("Seems like the password was exposed before.")
                 pwc_instance.pw_in_db = "YES"
             else:
