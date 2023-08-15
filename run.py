@@ -30,7 +30,7 @@ def get_password():
         print("That's not a password. Try again.")
         get_password()
     else:
-        pwc_instance.pw_clean = user_password
+        pwc_instance.pw_clean = user_password.upper()
 
 def check_password_frequency():
     print("Checking password frequency...")
@@ -44,12 +44,11 @@ def check_password_frequency():
 
 def hash_password():
     if pwc_instance.pw_clean == "":
-        print("Sorry, no password wa given")
+        print("Sorry, no password was given")
         get_password()
     else:
-        pwc_instance.pw_hash = hashlib.sha1(bytes(pwc_instance.pw_clean, "utf-8")).hexdigest()
+        pwc_instance.pw_hash = hashlib.sha1(bytes(pwc_instance.pw_clean, "utf-8")).hexdigest().upper()
         pwc_instance.pw_prefix = pwc_instance.pw_hash[0:5]
-        print(pwc_instance.pw_prefix)
 
 def check_password_database():
     request = requests.get("https://api.pwnedpasswords.com/range/" + pwc_instance.pw_prefix.upper())
@@ -71,7 +70,6 @@ def check_password_database():
                 print("Seems like the password was exposed before.")
                 pwc_instance.pw_in_db = "YES"
             else:
-                print("Nice, you are good to go!")
                 pwc_instance.pw_in_db = "NO"
 
 def main():
@@ -79,6 +77,12 @@ def main():
     check_password_frequency()
     hash_password()
     check_password_database()
+    print("Given password: " + pwc_instance.pw_clean)
+    print("SHA-1: " + pwc_instance.pw_hash)
+    print("API search parameter: " + pwc_instance.pw_prefix)
+    print("Password found in db: " + pwc_instance.pw_in_db)
+    print("Password is commonly used: " + pwc_instance.pw_in_list)
+    print("API search response: " + pwc_instance.pw_suffix)
 
 if __name__ == "__main__":
     main()
