@@ -2,11 +2,11 @@ import pyfiglet
 from simple_term_menu import TerminalMenu
 import hashlib
 import requests
+import re
 
 #Converts the passwords.txt file to a list
 common_passwords = open("passwords.txt", "r")
-common_passwords_data = common_passwords.read()
-common_passwords_data.split("\n")
+common_passwords_data = common_passwords.read().split("\n")
 common_passwords.close()
 
 # Class holding the password data
@@ -51,10 +51,34 @@ def hash_password():
         pwc_instance.pw_prefix = pwc_instance.pw_hash[0:5]
         print(pwc_instance.pw_prefix)
 
+def check_password_database():
+    request = requests.get("https://api.pwnedpasswords.com/range/" + pwc_instance.pw_prefix.upper())
+    
+    if request.status_code != 200:
+        print("Password doesnt seem to in the database")
+        pwc_instance.pw_in_db = "NO"
+    else:
+        print(request.iter_lines())
+        for hash in request.iter_lines():
+            stripped_hash = str(hash).strip("b'")
+            strip_numbers = r":.*"
+            stripped_numbers = re.sub(strip_numbers, "", stripped_hash)
+            complete_hash = pwc_instance.pw_prefix + stripped_numbers.upper()
+            complete_hash.strip()
+            hash_list = complete_hash.split("\n")
+
+            if pwc_instance.pw_hash in hash_list:
+                print("Seems like the password was exposed before.")
+                pwc_instance.pw_in_db = "YES"
+            else:
+                print("Nice, you are good to go!")
+                pwc_instance.pw_in_db = "NO"
+
 def main():
     get_password()
     check_password_frequency()
     hash_password()
+    check_password_database()
 
 if __name__ == "__main__":
     main()
