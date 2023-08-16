@@ -58,7 +58,6 @@ def check_password_database():
         print("Password doesnt seem to in the database")
         pwc_instance.pw_in_db = "NO"
     else:
-        print(request.iter_lines())
         for hash in request.iter_lines():
             stripped_hash = str(hash).strip("b'")
             strip_occur = r":.*"
