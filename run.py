@@ -21,7 +21,7 @@ class PasswordCheck:
         self.pw_suffix = pw_suffix
 
 #Instance of the class holding password data
-pwc_instance = PasswordCheck("", "", "", "", "", "")
+pwc_instance = PasswordCheck("", "", "", "NO", "", "")
 
 def get_password():
     user_password = input("Please enter the password you need to check: \n")
@@ -56,7 +56,6 @@ def check_password_database():
     
     if request.status_code != 200:
         print("Password doesnt seem to in the database")
-        pwc_instance.pw_in_db = "NO"
     else:
         for hash in request.iter_lines():
             stripped_hash = str(hash).strip("b'")
@@ -69,8 +68,6 @@ def check_password_database():
             if pwc_instance.pw_suffix in hash_list:
                 print("Seems like the password was exposed before.")
                 pwc_instance.pw_in_db = "YES"
-            else:
-                pwc_instance.pw_in_db = "NO"
 
 def main():
     get_password()
@@ -83,6 +80,7 @@ def main():
     print("Password found in db: " + pwc_instance.pw_in_db)
     print("Password is commonly used: " + pwc_instance.pw_in_list)
     print("API search response: " + pwc_instance.pw_suffix)
+    
 
 if __name__ == "__main__":
     main()
