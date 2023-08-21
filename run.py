@@ -26,7 +26,7 @@ pwc_instance = PasswordCheck("", "", "", "NO", "", "")
 def get_password():
     user_password = input("Please enter the password you need to check: \n")
 
-    if user_password.strip() == "":
+    if user_password.strip(" ") == "":
         print("That's not a password. Try again.")
         get_password()
     else:
@@ -47,12 +47,14 @@ def hash_password():
         print("Sorry, no password was given")
         get_password()
     else:
-        pwc_instance.pw_hash = hashlib.sha1(bytes(pwc_instance.pw_clean, "utf-8")).hexdigest().upper()
+        pwc_instance.pw_hash = hashlib.sha1(
+            bytes(pwc_instance.pw_clean, "utf-8")).hexdigest().upper()
         pwc_instance.pw_prefix = pwc_instance.pw_hash[0:5]
         pwc_instance.pw_suffix = pwc_instance.pw_hash[5:]
 
 def check_password_database():
-    request = requests.get("https://api.pwnedpasswords.com/range/" + pwc_instance.pw_prefix)
+    request = requests.get("https://api.pwnedpasswords.com/range/"
+                           + pwc_instance.pw_prefix)
     
     if request.status_code != 200:
         print("Password doesnt seem to in the database")
@@ -90,12 +92,12 @@ def main():
     check_password_frequency()
     hash_password()
     check_password_database()
-    check_password_complexity(pwc_instance.pw_clean)
 
     if check_password_complexity(pwc_instance.pw_clean):
         print("Password meets requirements. You are good to go!")
     else:
-        print("Password does not meet requirements. Try a mor complex one.")
+        print("Password does not meet requirements." 
+              "Try a mor complex one.")
 
     print("Given password: " + pwc_instance.pw_clean)
     print("SHA-1: " + pwc_instance.pw_hash)
