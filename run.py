@@ -1,8 +1,7 @@
-#import pyfiglet
+from time import sleep
 from simple_term_menu import TerminalMenu
-import hashlib
-import requests
-import re
+from colorama import Fore, Back, Style
+import hashlib, requests, re
 
 #Converts the passwords.txt file to a list
 common_passwords = open("passwords.txt", "r")
@@ -33,18 +32,18 @@ def get_password():
         pwc_instance.pw_clean = user_password
 
 def check_password_frequency():
-    print("Checking password frequency...")
-
+    print("\nChecking password frequency...")
+    sleep(2)
     if pwc_instance.pw_clean in common_passwords_data:
         print("Password is often used. Not so good.")
         pwc_instance.pw_in_list = "YES"
     else:
-        print("Password is not often used. Nice!")
+        print("Password is not often used. Nice!\n")
         pwc_instance.pw_in_list = "NO"
 
 def hash_password():
     if pwc_instance.pw_clean == "":
-        print("Sorry, no password was given")
+        print("Sorry, no password was given\n")
         get_password()
     else:
         pwc_instance.pw_hash = hashlib.sha1(
@@ -53,11 +52,13 @@ def hash_password():
         pwc_instance.pw_suffix = pwc_instance.pw_hash[5:]
 
 def check_password_database():
+    print("Checking database for entries...")
+    sleep(2)
     request = requests.get("https://api.pwnedpasswords.com/range/"
                            + pwc_instance.pw_prefix)
     
     if request.status_code != 200:
-        print("Password doesnt seem to in the database")
+        print("Password doesnt seem to in the database\n")
     else:
         for hash in request.iter_lines():
             stripped_hash = str(hash).strip("b'")
@@ -68,12 +69,12 @@ def check_password_database():
             hash_list = complete_hash.split("\n")
 
             if pwc_instance.pw_suffix in hash_list:
-                print("Seems like the password was exposed before.")
+                print("Seems like the password was exposed before.\n")
                 pwc_instance.pw_in_db = "YES"
 
 def check_password_complexity(*string):
     print("Checking password complexity...")
-
+    sleep(2)
     if len(pwc_instance.pw_clean) < 8:
         return False
     elif not re.search(r"[A-Z]", pwc_instance.pw_clean):
@@ -87,24 +88,28 @@ def check_password_complexity(*string):
     
     return True
 
+
 def main():
-    get_password()
-    check_password_frequency()
-    hash_password()
-    check_password_database()
+    menu_options = ["Simple mode",
+                    "Advanced mode",
+                    "Read manual",
+                    "Quit"]
+    menu = TerminalMenu(menu_options)
+    menu_index = menu.show()
+    menu_quit = False
 
-    if check_password_complexity(pwc_instance.pw_clean):
-        print("Password meets requirements. You are good to go!")
-    else:
-        print("Password does not meet requirements." 
-              "Try a mor complex one.")
 
-    print("Given password: " + pwc_instance.pw_clean)
-    print("SHA-1: " + pwc_instance.pw_hash)
-    print("API search parameter: " + pwc_instance.pw_prefix)
-    print("Password found in db: " + pwc_instance.pw_in_db)
-    print("Password is commonly used: " + pwc_instance.pw_in_list)
-    print("API search response: " + pwc_instance.pw_suffix)
+    if menu_index == 0:
+        print(f"You selected {menu_options[menu_index]}!\n")
+        get_password()
+        check_password_frequency()
+        check_password_database()
+        
+        if check_password_complexity(pwc_instance.pw_clean):
+            print("Password meets the minimum requirements. Great!")
+        else:
+            print("Password doesnt meet the minimum requirements.\n"
+                  "Try to add complexity!")
     
 
 if __name__ == "__main__":
