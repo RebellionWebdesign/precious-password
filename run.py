@@ -90,27 +90,82 @@ def check_password_complexity(*string):
 
 
 def main():
-    menu_options = ["Simple mode",
-                    "Advanced mode",
+    """ Sets menu options and displays the main menu -> simple mode"""
+    menu_options = ["Simple mode (shows simple data)",
+                    "Advanced mode (shows advanced data)",
                     "Read manual",
-                    "Quit"]
+                    "Quit [q or ESC]"]
     menu = TerminalMenu(menu_options)
     menu_index = menu.show()
     menu_quit = False
+    print(f"You selected {menu_options[menu_index]}!\n")
 
-
+    """ This is the menu logic """
     if menu_index == 0:
-        print(f"You selected {menu_options[menu_index]}!\n")
         get_password()
+        hash_password()
         check_password_frequency()
         check_password_database()
         
         if check_password_complexity(pwc_instance.pw_clean):
-            print("Password meets the minimum requirements. Great!")
+            print("Password meets the minimum requirements. Great!\n")
         else:
-            print("Password doesnt meet the minimum requirements.\n"
-                  "Try to add complexity!")
-    
+            print("Password doesn´t meet the minimum requirements.\n"
+                  "Try to add complexity!\n")
+        
+        menu.show()
+    elif menu_index == 1:
+        get_password()
+        print("Your password is: " + pwc_instance.pw_clean)
+        hash_password()
+        print("Your password hash is: " + pwc_instance.pw_hash)
+        print("Your password prefix is: " + pwc_instance.pw_prefix)
+        print("Your password suffix is: " + pwc_instance.pw_suffix)
+        check_password_frequency()
+        check_password_database()
+
+        menu.show()
+    elif menu_index == 2:
+        print("PRECIOUS PASSWORD MANUAL\n"
+              "\n"
+              "Welcome to PRECIOUS PASSWORD! This program allows users to\n"
+              "check if a given password is secure & part of a databreach. \n"
+              "You have the following options:\n"
+              "\n"
+              "SIMPLE MODE:\n"
+              "\n"
+              "Simple mode only shows easy digestible data related to your\n"
+              "given password. This means it only shows if your password\n"
+              "is commonly used and if it was hacked before. In addition\n"
+              "to that it checks your password for security by determining:\n"
+              "\n"
+              "-If the password has at least eight characters\n"
+              "-If the password has at least one upper case character\n"
+              "-If the password has at least one digit [0-9]\n"
+              "-If the password has at least one special character [!,?,etc]\n"
+              "\n"
+              "ADVANCED MODE:\n"
+              "\n"
+              "Advanced mode does the same as simple mode, but it also shows\n"
+              "the resulting SHA-1 hash divided into a prefix and a suffix.\n"
+              "The prefix represents the first five digits from the SHA-1\n"
+              "hash and is used to check if the prefix is in the database.\n"
+              "If the prefix is found, the PWNED PASSSWORD database returns\n"
+              "list of suffixes we need toc heck too."
+              "The suffix represents the remaining digits of the SHA-1 hash\n"
+              "and is used to check the PWNED PASSWORD database. If there\n"
+              "is a match between both of them your password is most likely\n"
+              "part of a breach and you will need to change it.")
+        
+        menu.show()
+    elif menu_index == 3:
+        menu_quit = True
+        print("Have a nice day and see you nect time :-)")
+        menu.show()
+        
+
+
+
 
 if __name__ == "__main__":
     main()
