@@ -1,4 +1,4 @@
-import pyfiglet
+#import pyfiglet
 from simple_term_menu import TerminalMenu
 import hashlib
 import requests
@@ -69,11 +69,34 @@ def check_password_database():
                 print("Seems like the password was exposed before.")
                 pwc_instance.pw_in_db = "YES"
 
+def check_password_complexity(*string):
+    print("Checking password complexity...")
+
+    if len(pwc_instance.pw_clean) < 8:
+        return False
+    elif not re.search(r"[A-Z]", pwc_instance.pw_clean):
+        return False
+    elif not re.search(r"[a-z]", pwc_instance.pw_clean):
+        return False
+    elif not re.search(r"\d", pwc_instance.pw_clean):
+        return False
+    elif not re.search(r'[!@#$%^&*(),.?":{}|<>]', pwc_instance.pw_clean):
+        return False
+    
+    return True
+
 def main():
     get_password()
     check_password_frequency()
     hash_password()
     check_password_database()
+    check_password_complexity(pwc_instance.pw_clean)
+
+    if check_password_complexity(pwc_instance.pw_clean):
+        print("Password meets requirements. You are good to go!")
+    else:
+        print("Password does not meet requirements. Try a mor complex one.")
+
     print("Given password: " + pwc_instance.pw_clean)
     print("SHA-1: " + pwc_instance.pw_hash)
     print("API search parameter: " + pwc_instance.pw_prefix)
