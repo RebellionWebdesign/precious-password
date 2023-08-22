@@ -1,7 +1,10 @@
-import hashlib, requests, re, colorama
+import hashlib, requests, re, colorama, pyfiglet
 from time import sleep
 from simple_term_menu import TerminalMenu
 from colorama import Fore, Back, Style
+
+ascii_text = pyfiglet.figlet_format("Precious Password")
+print(ascii_text)
 
 colorama.init(autoreset=True)
 
