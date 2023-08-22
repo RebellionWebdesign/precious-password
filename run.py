@@ -1,8 +1,7 @@
+import hashlib, requests, re, colorama
 from time import sleep
 from simple_term_menu import TerminalMenu
-import colorama
 from colorama import Fore, Back, Style
-import hashlib, requests, re
 
 colorama.init(autoreset=True)
 
