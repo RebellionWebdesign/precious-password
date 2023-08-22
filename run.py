@@ -1,4 +1,8 @@
-import hashlib, requests, re, colorama, pyfiglet
+import hashlib
+import requests
+import re
+import colorama
+import pyfiglet
 from time import sleep
 from simple_term_menu import TerminalMenu
 from colorama import Fore, Back, Style
@@ -8,10 +12,11 @@ print(ascii_text)
 
 colorama.init(autoreset=True)
 
-#Converts the passwords.txt file to a list
+# Converts the passwords.txt file to a list
 common_passwords = open("passwords.txt", "r")
 common_passwords_data = common_passwords.read().split("\n")
 common_passwords.close()
+
 
 # Class holding the password data
 class PasswordCheck:
@@ -24,8 +29,10 @@ class PasswordCheck:
         self.pw_in_list = pw_in_list
         self.pw_suffix = pw_suffix
 
-#Instance of the class holding password data
+
+# Instance of the class holding password data
 pwc_instance = PasswordCheck("", "", "", "NO", "", "")
+
 
 def get_password():
     user_password = input("Please enter the password you need to check: \n")
@@ -66,7 +73,7 @@ def check_password_database():
     sleep(2)
     request = requests.get("https://api.pwnedpasswords.com/range/"
                            + pwc_instance.pw_prefix)
-    
+
     if request.status_code != 200:
         print(Back.GREEN + "Password doesnt seem to be in the database")
         print()
@@ -80,7 +87,7 @@ def check_password_database():
             hash_list = complete_hash.split("\n")
 
             if pwc_instance.pw_suffix in hash_list:
-                print(Back.RED + 
+                print(Back.RED +
                       "Seems like the password was exposed before.")
                 print()
                 pwc_instance.pw_in_db = "YES"
@@ -99,7 +106,7 @@ def check_password_complexity(*string):
         return False
     elif not re.search(r'[!@#$%^&*(),.?":{}|<>]', pwc_instance.pw_clean):
         return False
-    
+
     return True
 
 
@@ -113,15 +120,15 @@ def main():
     main_cursor_style = ("fg_red", "bold")
     main_exit = False
     clear_screen = False
-    
+
     menu = TerminalMenu(
-        menu_entries = main_options,
-        title = main_title,
-        menu_cursor = main_cursor,
-        menu_cursor_style = main_cursor_style,
-        cycle_cursor = True,
+        menu_entries=main_options,
+        title=main_title,
+        menu_cursor=main_cursor,
+        menu_cursor_style=main_cursor_style,
+        cycle_cursor=True,
     )
-        
+
     manual_title = "This is the manual. Press q or ESC to go back."
     manual_items = ["Back to main menu"]
     manual_back = False
@@ -129,11 +136,10 @@ def main():
 
     manual_menu = TerminalMenu(
         manual_items,
-        title = manual_title,
-        menu_cursor = main_cursor,
-        menu_cursor_style = main_cursor_style,
+        title=manual_title,
+        menu_cursor=main_cursor,
+        menu_cursor_style=main_cursor_style,
     )
-
 
     while not main_exit:
         main_select = menu.show()
@@ -145,17 +151,15 @@ def main():
             hash_password()
             check_password_frequency()
 
-
             if check_password_complexity(pwc_instance.pw_clean):
-                print(Back.GREEN + 
+                print(Back.GREEN +
                       "Password meets the minimum requirements. Great!")
                 print()
             else:
-                print(Back.RED + 
+                print(Back.RED +
                       "Password doesn´t meet the minimum requirements."
                       "Try to add complexity!")
             print()
-            
             check_password_database()
 
         elif main_select == 1:
@@ -168,14 +172,13 @@ def main():
             print("Your password prefix is: " + pwc_instance.pw_prefix + "\n")
             print("Your password suffix is: " + pwc_instance.pw_suffix + "\n")
             check_password_frequency()
-            
 
             if check_password_complexity(pwc_instance.pw_clean):
-                print(Back.GREEN + 
+                print(Back.GREEN +
                       "Password meets the minimum requirements. Great!")
                 print()
             else:
-                print(Back.RED + 
+                print(Back.RED +
                       "Password doesn´t meet the minimum requirements."
                       "Try to add complexity!")
                 print()
@@ -188,12 +191,11 @@ def main():
                 manual_select = manual_menu.show()
                 print("This is a test!")
 
-
                 if manual_select == 0 or None:
                     manual_back = True
                     clear_screen = True
 
-        elif main_select == 3 or main_select == None:
+        elif main_select == 3 or main_select is None:
             main_exit = True
             clear_screen = True
 
