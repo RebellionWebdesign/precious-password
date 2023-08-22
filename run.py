@@ -1,7 +1,10 @@
 from time import sleep
 from simple_term_menu import TerminalMenu
+import colorama
 from colorama import Fore, Back, Style
 import hashlib, requests, re
+
+colorama.init(autoreset=True)
 
 #Converts the passwords.txt file to a list
 common_passwords = open("passwords.txt", "r")
@@ -26,7 +29,7 @@ def get_password():
     user_password = input("Please enter the password you need to check: \n")
 
     if user_password.strip(" ") == "":
-        print("That's not a password. Try again.")
+        print(Back.RED + "That's not a password. Try again.")
         get_password()
     else:
         pwc_instance.pw_clean = user_password
@@ -36,16 +39,18 @@ def check_password_frequency():
     print("\nChecking password frequency...")
     sleep(2)
     if pwc_instance.pw_clean in common_passwords_data:
-        print("Password is often used. Not so good.")
+        print(Back.RED + "Password is often used. Not so good.")
         pwc_instance.pw_in_list = "YES"
     else:
-        print("Password is not often used. Nice!\n")
+        print(Back.GREEN + "Password is not often used. Nice!")
+        print()
         pwc_instance.pw_in_list = "NO"
 
 
 def hash_password():
     if pwc_instance.pw_clean == "":
-        print("Sorry, no password was given\n")
+        print(Back.RED + "Sorry, no password was given")
+        print()
         get_password()
     else:
         pwc_instance.pw_hash = hashlib.sha1(
@@ -61,7 +66,8 @@ def check_password_database():
                            + pwc_instance.pw_prefix)
     
     if request.status_code != 200:
-        print("Password doesnt seem to in the database\n")
+        print(Back.GREEN + "Password doesnt seem to be in the database")
+        print()
     else:
         for hash in request.iter_lines():
             stripped_hash = str(hash).strip("b'")
@@ -72,7 +78,9 @@ def check_password_database():
             hash_list = complete_hash.split("\n")
 
             if pwc_instance.pw_suffix in hash_list:
-                print("Seems like the password was exposed before.\n")
+                print(Back.RED + 
+                      "Seems like the password was exposed before.")
+                print()
                 pwc_instance.pw_in_db = "YES"
 
 
@@ -100,7 +108,7 @@ def main():
                     "RTFM (Read The Friendly Manual)",
                     "Quit"]
     main_cursor = "> "
-    main_cursor_style = ("fg_blue", "bold")
+    main_cursor_style = ("fg_red", "bold")
     main_exit = False
     clear_screen = False
     
@@ -137,10 +145,14 @@ def main():
 
 
             if check_password_complexity(pwc_instance.pw_clean):
-                print("Password meets the minimum requirements. Great!\n")
+                print(Back.GREEN + 
+                      "Password meets the minimum requirements. Great!")
+                print()
             else:
-                print("Password doesn´t meet the minimum requirements.\n"
-                      "Try to add complexity!\n")
+                print(Back.RED + 
+                      "Password doesn´t meet the minimum requirements."
+                      "Try to add complexity!")
+            print()
             
             check_password_database()
 
@@ -157,10 +169,14 @@ def main():
             
 
             if check_password_complexity(pwc_instance.pw_clean):
-                print("Password meets the minimum requirements. Great!\n")
+                print(Back.GREEN + 
+                      "Password meets the minimum requirements. Great!")
+                print()
             else:
-                print("Password doesn´t meet the minimum requirements.\n"
-                      "Try to add complexity!\n")
+                print(Back.RED + 
+                      "Password doesn´t meet the minimum requirements."
+                      "Try to add complexity!")
+                print()
 
             check_password_database()
 
