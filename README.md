@@ -1,3 +1,5 @@
+![precious-password-readme-banner](assets/readme-images/pp3-readme-banner.png)
+
 Precious Password is a practical use app that is capable of taking a user defined password and to check if the password meets the requirements for safe passwords.
 
 You can use the live app [here](https://precious-password-2beae8772161.herokuapp.com/)
