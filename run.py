@@ -182,7 +182,8 @@ def main():
                 print(Back.RED +
                       "Password doesn´t meet the minimum requirements."
                       "Try to add complexity!")
-                print()
+                print("\n[At least 8 characters, one uppercase, one digit and" +
+                      "one special character!]")
 
             check_password_database()
 
@@ -194,9 +195,10 @@ def main():
 
                 if manual_select == 0 or None:
                     manual_back = True
-                    clear_screen = True
+                    
 
         elif main_select == 3 or main_select is None:
+            print("Thanks and have a nice day!")
             main_exit = True
             clear_screen = True
 
