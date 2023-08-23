@@ -14,6 +14,14 @@ You can use the live app [here](https://precious-password-2beae8772161.herokuapp
 
 ## FEATURES
 
+|        Feature         | Solves US (if applicable) |
+| :--------------------: | :-----------------------: |
+| Display welcome screen |            --             |
+|     Guide the user     |            --             |
+|                        |                           |
+|                        |                           |
+|                        |                           |
+
 
 
 ## DESIGN
@@ -58,7 +66,7 @@ The code was entirely written using [Python 3.11.4](https://www.python.org/) wit
 
 ## OTHER TOOLS
 
-todo
+No other tools were used.
 
 ## TESTING
 
@@ -114,10 +122,11 @@ You can also have a copy of the program on your local machine. It will work with
 
 - *Check the OS and use different code for the menu part.* The reason for this is being discussed under TECHNOLOGIES > IMPORTANT NOTE
 - *Add the ability to use the PasswordCheck class for multiple requests.* Since we have a class we can use instances of the class for storing multiple passwords and their corresponding datasets.
+- *Make the program modular.* This means to move the program functions to separate files (e.g. functions.py etc.) and keep the run.py file uncluttered. 
 
 ## CREDITS
 
-todo
+Credits go the developers who built the used libraries. Usually these are developed by teams, so you can have a look at the developers from the links in TECHNOLOGIES.
 
 ## SAYING THANKS
 
