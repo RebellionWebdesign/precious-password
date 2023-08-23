@@ -68,16 +68,14 @@ def hash_password():
 
 
 def check_password_database():
-    print("Checking database for entries...")
+    print("\nChecking database for entries...")
     sleep(2)
     request = requests.get("https://api.pwnedpasswords.com/range/"
                            + pwc_instance.pw_prefix)
-    print(request)
 
     if request.status_code != 200:
 
-        print(Back.GREEN + "Password doesnt seem to be in the database")
-        print()
+        print(Back.GREEN + "Password doesn´t seem to be in the database")
     else:
         for hash in request.iter_lines():
             stripped_hash = str(hash).strip("b'")
@@ -95,7 +93,7 @@ def check_password_database():
 
 
 def check_password_complexity(*string):
-    print("Checking password complexity...")
+    print("\nChecking password complexity...")
     sleep(2)
     if len(pwc_instance.pw_clean) < 8:
         return False
@@ -133,7 +131,6 @@ def main():
     manual_title = "This is the manual. Press q or ESC to go back."
     manual_items = ["Back to main menu"]
     manual_back = False
-    manual_clean = False
 
     manual_menu = TerminalMenu(
         manual_items,
@@ -160,7 +157,8 @@ def main():
                 print(Back.RED +
                       "Password doesn´t meet the minimum requirements."
                       "Try to add complexity!")
-            print()
+            print("[At least 8 characters, one uppercase, one digit and" +
+                      " one special character!]")
             check_password_database()
 
         elif main_select == 1:
@@ -182,8 +180,8 @@ def main():
                 print(Back.RED +
                       "Password doesn´t meet the minimum requirements."
                       "Try to add complexity!")
-                print("\n[At least 8 characters, one uppercase, one digit and" +
-                      "one special character!]")
+                print("[At least 8 characters, one uppercase, one digit and" +
+                      " one special character!]")
 
             check_password_database()
 
@@ -200,7 +198,6 @@ def main():
         elif main_select == 3 or main_select is None:
             print("Thanks and have a nice day!")
             main_exit = True
-            clear_screen = True
 
 
 if __name__ == "__main__":
