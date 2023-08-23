@@ -73,10 +73,7 @@ def check_password_database():
     request = requests.get("https://api.pwnedpasswords.com/range/"
                            + pwc_instance.pw_prefix)
 
-    if request.status_code != 200:
-
-        print(Back.GREEN + "Password doesn´t seem to be in the database")
-    else:
+    if request.status_code == 200:
         for hash in request.iter_lines():
             stripped_hash = str(hash).strip("b'")
             strip_occur = r":.*"
@@ -85,11 +82,13 @@ def check_password_database():
             complete_hash.strip()
             hash_list = complete_hash.split("\n")
 
-            if pwc_instance.pw_suffix in hash_list:
-                print(Back.RED +
-                      "Seems like the password was exposed before.")
-                print()
-                pwc_instance.pw_in_db = "YES"
+    if pwc_instance.pw_suffix in hash_list:
+        print(Back.RED +
+              "Seems like the password was exposed before.")
+        pwc_instance.pw_in_db = "YES"
+    else:
+        print(Back.GREEN +
+              "Password doesnt seem to be in the database")
 
 
 def check_password_complexity(*string):
@@ -110,7 +109,7 @@ def check_password_complexity(*string):
 
 
 def main():
-    main_title = "Choose an option. Press q or ESC to quit\n"
+    main_title = "\nChoose an option. Press q or ESC to quit\n"
     main_options = ["Simple mode (show simple data)",
                     "Advanced mode (show advanced data)",
                     "RTFM (Read The Friendly Manual)",
@@ -152,13 +151,12 @@ def main():
             if check_password_complexity(pwc_instance.pw_clean):
                 print(Back.GREEN +
                       "Password meets the minimum requirements. Great!")
-                print()
             else:
                 print(Back.RED +
                       "Password doesn´t meet the minimum requirements."
                       "Try to add complexity!")
-            print("[At least 8 characters, one uppercase, one digit and" +
-                      " one special character!]")
+                print("[At least 8 characters, one uppercase, one digit and" +
+                          " one special character!]")
             check_password_database()
 
         elif main_select == 1:
