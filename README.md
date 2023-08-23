@@ -110,7 +110,8 @@ You can also have a copy of the program on your local machine. It will work with
 
 ## FUTURE IMPROVEMENTS
 
-todo
+- *Check the OS and use different code for the menu part.* The reason for this is being discussed under TECHNOLOGIES > IMPORTANT NOTE
+- *Add the ability to use the PasswordCheck class for multiple requests.* Since we have a class we can use instances of the class for storing multiple passwords and their corresponding datasets.
 
 ## CREDITS
 
