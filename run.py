@@ -1,16 +1,15 @@
 import hashlib
 import requests
 import re
-import colorama
 import pyfiglet
 from time import sleep
 from simple_term_menu import TerminalMenu
-from colorama import Fore, Back, Style
+from colorama import Fore, Back, Style, init
 
 ascii_text = pyfiglet.figlet_format("Precious Password")
 print(ascii_text)
 
-colorama.init(autoreset=True)
+init(autoreset=True)
 
 # Converts the passwords.txt file to a list
 common_passwords = open("passwords.txt", "r")
@@ -73,8 +72,10 @@ def check_password_database():
     sleep(2)
     request = requests.get("https://api.pwnedpasswords.com/range/"
                            + pwc_instance.pw_prefix)
+    print(request)
 
     if request.status_code != 200:
+
         print(Back.GREEN + "Password doesnt seem to be in the database")
         print()
     else:
