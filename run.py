@@ -69,26 +69,16 @@ def hash_password():
 
 def check_password_database():
     print("\nChecking database for entries...")
-    sleep(2)
     request = requests.get("https://api.pwnedpasswords.com/range/"
                            + pwc_instance.pw_prefix)
 
-    if request.status_code == 200:
-        for hash in request.iter_lines():
-            stripped_hash = str(hash).strip("b'")
-            strip_occur = r":.*"
-            stripped_numbers = re.sub(strip_occur, "", stripped_hash)
-            complete_hash = stripped_numbers.upper()
-            complete_hash.strip()
-            hash_list = complete_hash.split("\n")
+    stripping_regex = r":.*"
+    stripped_request = re.sub(stripping_regex, "", request.text)
 
-    if pwc_instance.pw_suffix in hash_list:
-        print(Back.RED +
-              "Seems like the password was exposed before.")
-        pwc_instance.pw_in_db = "YES"
+    if pwc_instance.pw_suffix in stripped_request:
+        print(Back.RED + "Seems like the password was exposed before.")
     else:
-        print(Back.GREEN +
-              "Password doesnt seem to be in the database")
+        print(Back.GREEN + "Password doesnt seem to be in the database")
 
 
 def check_password_complexity(*string):
@@ -156,7 +146,7 @@ def main():
                       "Password doesn´t meet the minimum requirements."
                       "Try to add complexity!")
                 print("[At least 8 characters, one uppercase, one digit and" +
-                          " one special character!]")
+                      " one special character!]")
             check_password_database()
 
         elif main_select == 1:
@@ -191,7 +181,6 @@ def main():
 
                 if manual_select == 0 or None:
                     manual_back = True
-                    
 
         elif main_select == 3 or main_select is None:
             print("Thanks and have a nice day!")
