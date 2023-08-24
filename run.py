@@ -1,13 +1,10 @@
 import hashlib
 import requests
 import re
-import pyfiglet
 from time import sleep
-from simple_term_menu import TerminalMenu
+from consolemenu import *
+from consolemenu.items import *
 from colorama import Fore, Back, Style, init
-
-ascii_text = pyfiglet.figlet_format("Precious Password")
-print(ascii_text)
 
 init(autoreset=True)
 
@@ -69,6 +66,7 @@ def hash_password():
 
 def check_password_database():
     print("\nChecking database for entries...")
+    sleep(2)
     request = requests.get("https://api.pwnedpasswords.com/range/"
                            + pwc_instance.pw_prefix)
 
@@ -98,93 +96,91 @@ def check_password_complexity(*string):
     return True
 
 
+def easy_mode():
+    print("You selected easy mode")
+    get_password()
+    hash_password()
+    check_password_frequency()
+
+    if check_password_complexity(pwc_instance.pw_clean):
+        print(Back.GREEN +
+              "Password meets the minimum requirements. Great!")
+    else:
+        print(Back.RED +
+              "Password doesn´t meet the minimum requirements."
+              "Try to add complexity!")
+        print("[At least 8 characters, one uppercase, one digit and" +
+              " one special character!]")
+    check_password_database()
+
+    easy_question = input("Do you want to test another one [y/n]?\n")
+
+    if easy_question.strip() == "y":
+        easy_mode_question = input("Do you want to use easy or" +
+                                   "advanced mode [e/a] ?\n")
+        if easy_mode_question.strip() == "e":
+            easy_mode()
+        elif easy_mode_question.strip() == "a":
+            advanced_mode()
+    else:
+        main_menu()
+
+
+def advanced_mode():
+    print("You selected advanced mode")
+    sleep(2)
+    get_password()
+    print("Your password is: " + pwc_instance.pw_clean + "\n")
+    hash_password()
+    print("Your password hash is: " + pwc_instance.pw_hash + "\n")
+    print("Your password prefix is: " + pwc_instance.pw_prefix + "\n")
+    print("Your password suffix is: " + pwc_instance.pw_suffix + "\n")
+    check_password_frequency()
+
+    if check_password_complexity(pwc_instance.pw_clean):
+        print(Back.GREEN +
+              "Password meets the minimum requirements. Great!")
+        print()
+    else:
+        print(Back.RED +
+              "Password doesn´t meet the minimum requirements."
+              "Try to add complexity!")
+        print("[At least 8 characters, one uppercase, one digit and" +
+              " one special character!]")
+
+    check_password_database()
+    advanced_question = input("Do you want to test another one [y/n]?\n")
+
+    if advanced_question.strip() == "y":
+        advanced_mode_question = input("Do you want to use easy or" +
+                                       "advanced mode [e/a] ?\n")
+        if advanced_mode_question.strip() == "e":
+            easy_mode()
+        elif advanced_mode_question.strip() == "a":
+            advanced_mode()
+    else:
+        main_menu()
+
+
+def main_menu():
+    menu = ConsoleMenu("Welcome to Precious Password!",
+                       "This is the main menu!")
+    menu_item = MenuItem("Menu Item")
+    first_item = FunctionItem("Simple Feedback Mode",
+                              easy_mode)
+    second_item = FunctionItem("Advanced Feedback Mode",
+                               advanced_mode)
+    third_item = FunctionItem("RTFM [Read The Friendly Manual]",
+                              input, ["Enter an input"])
+
+    menu.append_item(first_item)
+    menu.append_item(second_item)
+    menu.append_item(third_item)
+    menu.show()
+
+
 def main():
-    main_title = "\nChoose an option. Press q or ESC to quit\n"
-    main_options = ["Simple mode (show simple data)",
-                    "Advanced mode (show advanced data)",
-                    "RTFM (Read The Friendly Manual)",
-                    "Quit"]
-    main_cursor = "> "
-    main_cursor_style = ("fg_red", "bold")
-    main_exit = False
-    clear_screen = False
-
-    menu = TerminalMenu(
-        menu_entries=main_options,
-        title=main_title,
-        menu_cursor=main_cursor,
-        menu_cursor_style=main_cursor_style,
-        cycle_cursor=True,
-    )
-
-    manual_title = "This is the manual. Press q or ESC to go back."
-    manual_items = ["Back to main menu"]
-    manual_back = False
-
-    manual_menu = TerminalMenu(
-        manual_items,
-        title=manual_title,
-        menu_cursor=main_cursor,
-        menu_cursor_style=main_cursor_style,
-    )
-
-    while not main_exit:
-        main_select = menu.show()
-
-        if main_select == 0:
-            print("You selected simple mode")
-            sleep(2)
-            get_password()
-            hash_password()
-            check_password_frequency()
-
-            if check_password_complexity(pwc_instance.pw_clean):
-                print(Back.GREEN +
-                      "Password meets the minimum requirements. Great!")
-            else:
-                print(Back.RED +
-                      "Password doesn´t meet the minimum requirements."
-                      "Try to add complexity!")
-                print("[At least 8 characters, one uppercase, one digit and" +
-                      " one special character!]")
-            check_password_database()
-
-        elif main_select == 1:
-            print("You selected advanced mode")
-            sleep(2)
-            get_password()
-            print("Your password is: " + pwc_instance.pw_clean + "\n")
-            hash_password()
-            print("Your password hash is: " + pwc_instance.pw_hash + "\n")
-            print("Your password prefix is: " + pwc_instance.pw_prefix + "\n")
-            print("Your password suffix is: " + pwc_instance.pw_suffix + "\n")
-            check_password_frequency()
-
-            if check_password_complexity(pwc_instance.pw_clean):
-                print(Back.GREEN +
-                      "Password meets the minimum requirements. Great!")
-                print()
-            else:
-                print(Back.RED +
-                      "Password doesn´t meet the minimum requirements."
-                      "Try to add complexity!")
-                print("[At least 8 characters, one uppercase, one digit and" +
-                      " one special character!]")
-
-            check_password_database()
-
-        elif main_select == 2:
-
-            while not manual_back:
-                manual_select = manual_menu.show()
-                print("This is a test!")
-
-                if manual_select == 0 or None:
-                    manual_back = True
-
-        elif main_select == 3 or main_select is None:
-            print("Thanks and have a nice day!")
-            main_exit = True
+    main_menu()
 
 
 if __name__ == "__main__":
