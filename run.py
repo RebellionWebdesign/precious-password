@@ -4,6 +4,7 @@ import re
 from time import sleep
 from consolemenu import *
 from consolemenu.items import *
+from os import system, name
 from colorama import Fore, Back, Style, init
 
 init(autoreset=True)
@@ -113,18 +114,21 @@ def easy_mode():
               " one special character!]")
     check_password_database()
 
-    easy_question = input("Do you want to test another one [y/n]?\n")
+    easy_question = input("\nDo you want to test another one [y/n]?\n")
 
     if easy_question.strip() == "y":
-        easy_mode_question = input("Do you want to use easy or" +
+        easy_mode_question = input("\nDo you want to use easy or" +
                                    "advanced mode [e/a] ?\n")
         if easy_mode_question.strip() == "e":
+            clear_screen()
             easy_mode()
         elif easy_mode_question.strip() == "a":
+            clear_screen()
             advanced_mode()
+        elif easy_mode_question.strip != "e" or "a":
+            print("Sorry, thats no answer.")
     else:
         main_menu()
-
 
 def advanced_mode():
     print("You selected advanced mode")
@@ -149,7 +153,7 @@ def advanced_mode():
               " one special character!]")
 
     check_password_database()
-    advanced_question = input("Do you want to test another one [y/n]?\n")
+    advanced_question = input("\nDo you want to test another one [y/n]?\n")
 
     if advanced_question.strip() == "y":
         advanced_mode_question = input("Do you want to use easy or" +
@@ -158,9 +162,16 @@ def advanced_mode():
             easy_mode()
         elif advanced_mode_question.strip() == "a":
             advanced_mode()
+        elif advanced_mode_question.strip != "e" or "a":
+            print("Sorry, thats no answer.")
     else:
         main_menu()
 
+def clear_screen():
+    if name == "nt":
+        _ = system("cls")
+    else:
+        _ = system("clear")
 
 def main_menu():
     menu = ConsoleMenu("Welcome to Precious Password!",
