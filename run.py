@@ -266,7 +266,7 @@ def main_menu():
                        " when prompted!", show_exit_option=False)
     menu_item = MenuItem("Menu Item")
     first_item = FunctionItem("Simple Feedback Mode",
-                              easy_mode)
+                              simple_mode)
     second_item = FunctionItem("Advanced Feedback Mode",
                                advanced_mode)
     third_item = FunctionItem("RTFM [Read The Friendly Manual]",
