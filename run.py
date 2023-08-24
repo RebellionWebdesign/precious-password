@@ -126,10 +126,12 @@ def easy_mode():
             clear_screen()
             advanced_mode()
         elif easy_mode_question.strip != "e" or "a":
-            sleep(1)
-            print("Sorry, thats no answer.")
+            clear_screen()
+            print("Sorry, thats no answer. I will send you to the main menu!")
+            sleep(5)
     else:
         main_menu()
+
 
 def advanced_mode():
     print("You selected advanced mode")
@@ -160,20 +162,25 @@ def advanced_mode():
         advanced_mode_question = input("Do you want to use easy or" +
                                        "advanced mode [e/a] ?\n")
         if advanced_mode_question.strip() == "e":
+            clear_screen()
             easy_mode()
         elif advanced_mode_question.strip() == "a":
+            clear_screen()
             advanced_mode()
         elif advanced_mode_question.strip != "e" or "a":
-            print("Sorry, thats no answer.")
-            sleep(1)
+            clear_screen()
+            print("Sorry, thats no answer. I will send you to the main menu!")
+            sleep(5)
     else:
         main_menu()
+
 
 def clear_screen():
     if name == "nt":
         _ = system("cls")
     else:
         _ = system("clear")
+
 
 def main_menu():
     menu = ConsoleMenu("Welcome to Precious Password!",
