@@ -6,19 +6,19 @@ To ensure the website works on many different browsers, the website was tested o
 
 ### CHROME:
 
-https://github.com/RebellionWebdesign/fab-forever/assets/80954446/defef3bc-5f46-427d-b130-82e560cc9fa6
+https://github.com/RebellionWebdesign/precious-password/blob/0623a95fb289bf8750cc2372e747573fdfc9de3a/docs/testing-images/pp3-chrome-compat.png
 
 ### FIREFOX:
 
-https://github.com/RebellionWebdesign/fab-forever/assets/80954446/9d9f7de2-c826-4be2-92d7-196fbc41eb06
+https://github.com/RebellionWebdesign/precious-password/blob/0623a95fb289bf8750cc2372e747573fdfc9de3a/docs/testing-images/pp3-firefox-dev-compat.png
 
 ### EDGE:
 
-https://github.com/RebellionWebdesign/fab-forever/assets/80954446/3c2b92e7-1735-43d0-833a-7c1ba5edf421
+https://github.com/RebellionWebdesign/precious-password/blob/0623a95fb289bf8750cc2372e747573fdfc9de3a/docs/testing-images/pp3-edge-compat.png
 
 ### BRAVE:
 
-https://github.com/RebellionWebdesign/fab-forever/assets/80954446/8ac3696d-9b3f-4b4a-9b27-6e948c42c49f
+https://github.com/RebellionWebdesign/precious-password/blob/0623a95fb289bf8750cc2372e747573fdfc9de3a/docs/testing-images/pp3-brave-compat.png
 
 ## RESPONSIVE BEHAVIOR:
 
@@ -62,49 +62,6 @@ The underlying code was validated with Code Institutes PEP8 validator
 ## LIGHTHOUSE REPORTS
 
 ### LANDING PAGE
-![nu homepage result](https://github.com/RebellionWebdesign/fab-forever/blob/main/assets/img/lighthouse-homepage.png)
-
-### CONTENT PAGES
-
-#### BASICS PAGE
-![lighthouse-basics](https://github.com/RebellionWebdesign/fab-forever/assets/80954446/781ea6dd-33ed-49d9-b08b-6c5dec51a56c)
-
-#### MATERIALS PAGE
-![lighthouse-materials](https://github.com/RebellionWebdesign/fab-forever/assets/80954446/09508fdf-2b31-42cf-a293-cb27488a6548)
-
-#### MODELS PAGE
-![lighthouse-models](https://github.com/RebellionWebdesign/fab-forever/assets/80954446/5fe5825f-6613-4d00-8778-c500a327a421)
-
-#### HELP PAGE
-![lighthouse-help](https://github.com/RebellionWebdesign/fab-forever/assets/80954446/18b0071e-8246-4318-9fcf-2f2138ebda98)
-
-### RESPONSE PAGE
-![lighthouse-response](https://github.com/RebellionWebdesign/fab-forever/assets/80954446/b2ddf436-e790-4e0e-b8bf-05617f0b93e9)
+![lighthouse result](docs/testing-images/pp3-lighthouse-result.png)
 
 ## BUGS
-
-### PAGE SIDESCROLLING ON MOBILE DEVICES
-
-- There was an issue with the page content scrolling sideways on mobile devices. The mobile menu is built as a hidden sidebar
-which widens the document body and therefore enables sidescrolling. The solution was to add the following, which constrains the document to the viewport width and hides overflow in the x-direction.
-
-`body, html {
-    width: 100%;
-    overflow-x: hidden
-}`
-
-
-
-### WRONG RESPONSIVE BEHAVIOUR
-
-- Another bug was related to responsiveness of the site where the shape dividers were overflowing and causing bad scaling on mobile devices.
-The solution was to add the following to the dividers:
-
-`.divider {
-    width: 100%;
-}`
-
-### WRONG BEHAVIOUR FOR THE GRID CARDS
-
-- The last bug was due to the grid cards having a large padding to the left which caused the grid container to overflow before collapsing.
-The padding was inherited from the desktop viewport. The solution was to remove the padding from the media queries. 
