@@ -126,6 +126,7 @@ def easy_mode():
             clear_screen()
             advanced_mode()
         elif easy_mode_question.strip != "e" or "a":
+            sleep(1)
             print("Sorry, thats no answer.")
     else:
         main_menu()
@@ -164,6 +165,7 @@ def advanced_mode():
             advanced_mode()
         elif advanced_mode_question.strip != "e" or "a":
             print("Sorry, thats no answer.")
+            sleep(1)
     else:
         main_menu()
 
