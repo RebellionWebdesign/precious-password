@@ -247,10 +247,11 @@ def exit_program():
     exit_question = input("\nAre you sure you want to quit [y/n]?\n")
 
     if exit_question == "y":
-        print("\n Okay, have anice day and see you soon :-)", flush=True)
-        exit()
+        print("\n Okay, have anice day and see you soon :-)", flush = True)
+        sleep(3)
+        main()
     elif exit_question == "n":
-        main_menu()
+        main()
     elif exit_question != "y" or "n":
         print("\nSorry, thats not the correct key")
         exit_program()
