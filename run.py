@@ -1,12 +1,15 @@
+# Built in libraries
+from time import sleep
+# 3rd party libraries
+import re 
 import hashlib
 import requests
-import re
-from time import sleep
 from consolemenu import *
 from consolemenu.items import *
 from os import system, name
 from colorama import Fore, Back, Style, init
 
+# Initialises the autoreset on newline for colorama
 init(autoreset=True)
 
 # Converts the passwords.txt file to a list
