@@ -134,7 +134,7 @@ def check_password_complexity(*string):
     return True
 
 
-def easy_mode():
+def simple_mode():
     """
     This is the "Simple Feedback Mode". It checks the user password
     against all the above functions and notifies the user whether a test
@@ -165,7 +165,7 @@ def easy_mode():
                                    " advanced mode [e/a] ?\n")
         if easy_mode_question.strip() == "e":
             clear_screen()
-            easy_mode()
+            simple_mode()
         elif easy_mode_question.strip() == "a":
             clear_screen()
             advanced_mode()
@@ -181,7 +181,7 @@ def easy_mode():
 def advanced_mode():
     """
     This is the "Advanced Feedback Mode". It basically does the same as
-    the easy_mode() function, but adds the SHA-1 checksum, prefix and
+    the simple_mode() function, but adds the SHA-1 checksum, prefix and
     suffix
     """
     print("You selected advanced mode")
@@ -214,7 +214,7 @@ def advanced_mode():
                                        " advanced mode [e/a] ?\n")
         if advanced_mode_question.strip() == "e":
             clear_screen()
-            easy_mode()
+            simple_mode()
         elif advanced_mode_question.strip() == "a":
             clear_screen()
             advanced_mode()
