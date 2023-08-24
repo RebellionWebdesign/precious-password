@@ -20,6 +20,9 @@ common_passwords.close()
 
 # Class holding the password data
 class PasswordCheck:
+    """
+    The base class for the program which provides password data storage. 
+    """
     def __init__(self, pw_clean, pw_hash, pw_prefix, pw_in_db,
                  pw_in_list, pw_suffix):
         self.pw_clean = pw_clean
@@ -30,7 +33,7 @@ class PasswordCheck:
         self.pw_suffix = pw_suffix
 
 
-# Instance of the class holding password data
+# Instance of the base class. Used to store and access password data
 pwc_instance = PasswordCheck("", "", "", "NO", "", "")
 
 
