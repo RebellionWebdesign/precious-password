@@ -184,7 +184,8 @@ def clear_screen():
 
 def main_menu():
     menu = ConsoleMenu("Welcome to Precious Password!",
-                       "This is the main menu!")
+                       "Please select an option and type your password" + 
+                       "when prompted!")
     menu_item = MenuItem("Menu Item")
     first_item = FunctionItem("Simple Feedback Mode",
                               easy_mode)
