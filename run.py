@@ -127,8 +127,10 @@ def easy_mode():
             advanced_mode()
         elif easy_mode_question.strip != "e" or "a":
             clear_screen()
-            print("Sorry, thats no answer. I will send you to the main menu!")
-            sleep(5)
+            print("Sorry, thats no answer. I will send you to the main menu" +
+                  " in 3 seconds!"
+                  , flush=True)
+            sleep(3)
     else:
         main_menu()
 
@@ -169,8 +171,10 @@ def advanced_mode():
             advanced_mode()
         elif advanced_mode_question.strip != "e" or "a":
             clear_screen()
-            print("Sorry, thats no answer. I will send you to the main menu!")
-            sleep(5)
+            print("Sorry, thats no answer. I will send you to the main menu" +
+                  " in 3 seconds!"
+                  , flush=True)
+            sleep(3)
     else:
         main_menu()
 
