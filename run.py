@@ -161,7 +161,7 @@ def easy_mode():
 
     if easy_question.strip() == "y":
         easy_mode_question = input("\nDo you want to use easy or" +
-                                   "advanced mode [e/a] ?\n")
+                                   " advanced mode [e/a] ?\n")
         if easy_mode_question.strip() == "e":
             clear_screen()
             easy_mode()
@@ -202,7 +202,7 @@ def advanced_mode():
     else:
         print(Back.RED +
               "Password doesn´t meet the minimum requirements."
-              "Try to add complexity!")
+              " Try to add complexity!")
         print("[At least 8 characters, one uppercase, one digit and" +
               " one special character!]")
 
@@ -211,7 +211,7 @@ def advanced_mode():
 
     if advanced_question.strip() == "y":
         advanced_mode_question = input("Do you want to use easy or" +
-                                       "advanced mode [e/a] ?\n")
+                                       " advanced mode [e/a] ?\n")
         if advanced_mode_question.strip() == "e":
             clear_screen()
             easy_mode()
@@ -238,6 +238,22 @@ def clear_screen():
     else:
         _ = system("clear")
 
+def exit_program():
+    """
+    The consolemenu library doesnt provide an interface for printing a
+    message when the user quits. So this is a basic custom function to
+    do so. 
+    """
+    exit_question = input("\nAre you sure you want to quit [y/n]?\n")
+
+    if exit_question == "y":
+        print("\n Okay, have anice day and see you soon :-)", flush=True)
+        exit()
+    elif exit_question == "n":
+        main_menu()
+    elif exit_question != "y" or "n":
+        print("\nSorry, thats not the correct key")
+        exit_program()
 
 def main_menu():
     """
@@ -245,7 +261,7 @@ def main_menu():
     """
     menu = ConsoleMenu("Welcome to Precious Password!",
                        "Please select an option and type your password" + 
-                       " when prompted!")
+                       " when prompted!", show_exit_option=False)
     menu_item = MenuItem("Menu Item")
     first_item = FunctionItem("Simple Feedback Mode",
                               easy_mode)
@@ -253,10 +269,13 @@ def main_menu():
                                advanced_mode)
     third_item = FunctionItem("RTFM [Read The Friendly Manual]",
                               input, ["Enter an input"])
+    fourth_item = FunctionItem("Quit", exit_program)
+
 
     menu.append_item(first_item)
     menu.append_item(second_item)
     menu.append_item(third_item)
+    menu.append_item(fourth_item)
     menu.show()
 
 
