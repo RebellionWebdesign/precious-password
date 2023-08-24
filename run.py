@@ -1,7 +1,7 @@
 # Built in libraries
 from time import sleep
 # 3rd party libraries
-import re 
+import re
 import hashlib
 import requests
 from consolemenu import *
@@ -23,6 +23,7 @@ class PasswordCheck:
     """
     The base class for the program which provides password data storage. 
     """
+
     def __init__(self, pw_clean, pw_hash, pw_prefix, pw_in_db,
                  pw_in_list, pw_suffix):
         self.pw_clean = pw_clean
@@ -145,7 +146,7 @@ def easy_mode():
     hash_password()
     check_password_frequency()
 
-    # This validates the check_password_complexity() function 
+    # This validates the check_password_complexity() function
     if check_password_complexity(pwc_instance.pw_clean):
         print(Back.GREEN +
               "Password meets the minimum requirements. Great!")
@@ -171,8 +172,7 @@ def easy_mode():
         elif easy_mode_question.strip != "e" or "a":
             clear_screen()
             print("Sorry, thats no answer. I will send you to the main menu" +
-                  " in 3 seconds!"
-                  , flush=True)
+                  " in 3 seconds!", flush=True)
             sleep(3)
     else:
         main_menu()
@@ -221,8 +221,7 @@ def advanced_mode():
         elif advanced_mode_question.strip != "e" or "a":
             clear_screen()
             print("Sorry, thats no answer. I will send you to the main menu" +
-                  " in 3 seconds!"
-                  , flush=True)
+                  " in 3 seconds!", flush=True)
             sleep(3)
     else:
         main_menu()
@@ -238,6 +237,7 @@ def clear_screen():
     else:
         _ = system("clear")
 
+
 def exit_program():
     """
     The consolemenu library doesnt provide an interface for printing a
@@ -247,7 +247,7 @@ def exit_program():
     exit_question = input("\nAre you sure you want to quit [y/n]?\n")
 
     if exit_question == "y":
-        print("\n Okay, have anice day and see you soon :-)", flush = True)
+        print("\n Okay, have anice day and see you soon :-)", flush=True)
         sleep(3)
         main()
     elif exit_question == "n":
@@ -256,12 +256,13 @@ def exit_program():
         print("\nSorry, thats not the correct key")
         exit_program()
 
+
 def main_menu():
     """
     Constructs the main menu and displays it.
     """
     menu = ConsoleMenu("Welcome to Precious Password!",
-                       "Please select an option and type your password" + 
+                       "Please select an option and type your password" +
                        " when prompted!", show_exit_option=False)
     menu_item = MenuItem("Menu Item")
     first_item = FunctionItem("Simple Feedback Mode",
@@ -271,7 +272,6 @@ def main_menu():
     third_item = FunctionItem("RTFM [Read The Friendly Manual]",
                               input, ["Enter an input"])
     fourth_item = FunctionItem("Quit", exit_program)
-
 
     menu.append_item(first_item)
     menu.append_item(second_item)
