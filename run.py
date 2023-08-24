@@ -35,6 +35,10 @@ pwc_instance = PasswordCheck("", "", "", "NO", "", "")
 
 
 def get_password():
+    """
+    Takes a user password from input(), strips spaces from start and end
+    and validates the input. Loops until a valid password is given.
+    """
     user_password = input("Please enter the password you need to check: \n")
 
     if user_password.strip(" ") == "":
@@ -45,6 +49,11 @@ def get_password():
 
 
 def check_password_frequency():
+    """
+    Takes the passwords.txt file and converts it to a list. After the
+    user password is recieved it gets compared to the list. if the pass-
+    word is in the list the user gets a message, and if not too! 
+    """
     print("\nChecking password frequency...")
     sleep(2)
     if pwc_instance.pw_clean in common_passwords_data:
@@ -57,6 +66,14 @@ def check_password_frequency():
 
 
 def hash_password():
+    """
+    Checks if the pwc_instance class has a value in pw_clean. If not, no
+    password was given and the user gets invited to again to give a
+    password. If a password was given, it gets hashed to a SHA-1 check-
+    sum for the pwned password api. The SHA.1 checksum gets separated to
+    the prefix (first five chars of SHA-1) and the suffix (remaining
+    chars from the SHA-1) which get stored in pwc_instance
+    """
     if pwc_instance.pw_clean == "":
         print(Back.RED + "Sorry, no password was given")
         print()
@@ -69,6 +86,14 @@ def hash_password():
 
 
 def check_password_database():
+    """
+    Takes the SHA-1 prefix from pwc_instance.pw_prefix and sends a GET
+    request to the pwned passwords api. The api returns SHA-1 suffixes
+    as a list which get stripped (all chars/nums after the colon). Then
+    we can compare the previously generated password suffix to the
+    passwords list. If a match is found the user gets notified, and if
+    not the user gets nitified too.
+    """
     print("\nChecking database for entries...")
     sleep(2)
     request = requests.get("https://api.pwnedpasswords.com/range/"
@@ -84,6 +109,11 @@ def check_password_database():
 
 
 def check_password_complexity(*string):
+    """
+    Checks the given password for complexity by constraining it to at
+    least 8 chars, one uppercase, one digit and a special char. Returns
+    True only if all checks are true.
+    """
     print("\nChecking password complexity...")
     sleep(2)
     if len(pwc_instance.pw_clean) < 8:
@@ -101,11 +131,18 @@ def check_password_complexity(*string):
 
 
 def easy_mode():
+    """
+    This is the "Simple Feedback Mode". It checks the user password
+    against all the above functions and notifies the user whether a test
+    was passed or not. In addition it invites the user to check
+    another password and to maybe change the feedback modes.
+    """
     print("You selected easy mode")
     get_password()
     hash_password()
     check_password_frequency()
 
+    # This validates the check_password_complexity() function 
     if check_password_complexity(pwc_instance.pw_clean):
         print(Back.GREEN +
               "Password meets the minimum requirements. Great!")
@@ -139,6 +176,11 @@ def easy_mode():
 
 
 def advanced_mode():
+    """
+    This is the "Advanced Feedback Mode". It basically does the same as
+    the easy_mode() function, but adds the SHA-1 checksum, prefix and
+    suffix
+    """
     print("You selected advanced mode")
     sleep(2)
     get_password()
@@ -149,6 +191,7 @@ def advanced_mode():
     print("Your password suffix is: " + pwc_instance.pw_suffix + "\n")
     check_password_frequency()
 
+    # This validates the check_password_complexity() function
     if check_password_complexity(pwc_instance.pw_clean):
         print(Back.GREEN +
               "Password meets the minimum requirements. Great!")
@@ -183,6 +226,10 @@ def advanced_mode():
 
 
 def clear_screen():
+    """
+    Clears the screen to have an uncluttered experience after checking
+    if the OS used is NT (Windows) or POSIX (Linux/Mac)
+    """
     if name == "nt":
         _ = system("cls")
     else:
@@ -190,9 +237,12 @@ def clear_screen():
 
 
 def main_menu():
+    """
+    Constructs the main menu and displays it.
+    """
     menu = ConsoleMenu("Welcome to Precious Password!",
                        "Please select an option and type your password" + 
-                       "when prompted!")
+                       " when prompted!")
     menu_item = MenuItem("Menu Item")
     first_item = FunctionItem("Simple Feedback Mode",
                               easy_mode)
@@ -208,8 +258,16 @@ def main_menu():
 
 
 def main():
+    """
+    Starts the menu function which handles the other functions
+    """
     main_menu()
 
 
 if __name__ == "__main__":
+    """
+    This gets executed only, if the code to beexecuted is handled
+    directly by python. Doesnt work when we import the file e.g.
+    import run.py
+    """
     main()
