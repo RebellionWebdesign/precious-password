@@ -115,7 +115,7 @@ def check_password_database():
     as a list which get stripped (all chars/nums after the colon). Then
     we can compare the previously generated password suffix to the
     passwords list. If a match is found the user gets notified, and if
-    not the user gets nitified too.
+    not the user gets notified too.
     """
     print("\nChecking database for entries...")
     sleep(2)
