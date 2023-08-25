@@ -2,13 +2,14 @@ Welcome to the Precious Password manual!
 
 Precious Password is an app to check if your passwords are safe to use. It 
 is fairly easy to use and does most of the stuff it needs to do on auto-
-magic. So without furher ado, let´s dive right in.
+magic. So without furher ado, lets dive right in.
 
 HOW DO I USE THIS APP?
 
 You simply select an option from the main menu by pressing its number and
-follow the prompts. Let´s say you want to test out the simple mode. You 
+follow the prompts. Lets say you want to test out the simple mode. You 
 simply press 1 on the keyboard followed by enter and type in your password.
+The same goes for the advanced mode.
 
 WHAT DOES THE APP DO?
 
@@ -21,9 +22,9 @@ After you have entered your password the program does the following:
 - Test the password for complexity
 - Search the pwned passwords api for the password using the prefix
 - Compare the api response against your suffix
-- Give you feedback on yur password
+- Give you feedback on your password
 
-That´s basically all.
+Thats basically all.
 
 If you need information on how the api works go here:
 https://haveibeenpwned.com/API/v3#PwnedPasswords
