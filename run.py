@@ -37,6 +37,7 @@ class PasswordCheck:
 # Instance of the base class. Used to store and access password data
 pwc_instance = PasswordCheck("", "", "", "NO", "", "")
 
+
 def back_to_main():
     check_button = input("Press ENTER to go back to the main menu!")
 
@@ -280,7 +281,7 @@ def main_menu():
     Constructs the main menu and displays it.
     """
     menu = ConsoleMenu("Welcome to Precious Password!",
-                       "Please type an option and type your password" +
+                       " Please type an option and type your password" +
                        " when prompted!", show_exit_option=False)
     menu_item = MenuItem("Menu Item")
     first_item = FunctionItem("Simple Feedback Mode",
