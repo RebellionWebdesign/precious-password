@@ -51,9 +51,11 @@ def show_manual():
     manual_open = open("manual.txt", "r")
     manual_read = manual_open.read()
     manual_open.close()
+    clear_screen()
     print(manual_read)
 
     back_to_main()
+
 
 def get_password():
     """
@@ -160,13 +162,17 @@ def exit_program():
     exit_question = input("\nAre you sure you want to quit [y/n]?\n")
 
     if exit_question == "y":
-        print("\nOkay, have anice day and see you soon :-)", flush=True)
+        clear_screen()
+        print("\nOkay, have a nice day and see you soon :-)", flush=True)
         sleep(3)
         main()
     elif exit_question == "n":
-        print("\nOkay, I will restart the program :-)", flush=True)
+        clear_screen()
+        print("\nOkay, I will restart the program now :-)", flush=True)
+        sleep(3)
         main()
     elif exit_question != "y" or "n":
+        clear_screen()
         print("\nSorry, thats not the correct key")
         exit_program()
 
@@ -204,6 +210,7 @@ def simple_mode():
     was passed or not. In addition it invites the user to check
     another password and to maybe change the feedback modes.
     """
+    clear_screen()
     print("You selected simple mode")
     get_password()
     hash_password()
@@ -230,6 +237,7 @@ def advanced_mode():
     the simple_mode() function, but adds the SHA-1 checksum, prefix and
     suffix
     """
+    clear_screen()
     print("You selected advanced mode")
     sleep(2)
     get_password()
