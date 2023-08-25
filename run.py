@@ -5,8 +5,8 @@ import re
 import hashlib
 import requests
 from consolemenu import *
-from consolemenu.items import *
 from os import system, name
+from consolemenu.items import *
 from colorama import Fore, Back, Style, init
 
 # Initialises the autoreset on newline for colorama
@@ -37,6 +37,23 @@ class PasswordCheck:
 # Instance of the base class. Used to store and access password data
 pwc_instance = PasswordCheck("", "", "", "NO", "", "")
 
+def back_to_main():
+    check_button = input("Press ENTER to go back to the main menu!")
+
+    if check_button == "":
+        main()
+    else:
+        print("Please only press ENTER :-)")
+        back_to_main()
+
+
+def show_manual():
+    manual_open = open("manual.txt", "r")
+    manual_read = manual_open.read()
+    manual_open.close()
+    print(manual_read)
+
+    back_to_main()
 
 def get_password():
     """
@@ -133,6 +150,7 @@ def check_password_complexity(*string):
 
     return True
 
+
 def exit_program():
     """
     The consolemenu library doesnt provide an interface for printing a
@@ -146,36 +164,37 @@ def exit_program():
         sleep(3)
         main()
     elif exit_question == "n":
-        print("\nOkay, have anice day and see you soon :-)", flush=True)
+        print("\nOkay, I will restart the program :-)", flush=True)
         main()
     elif exit_question != "y" or "n":
         print("\nSorry, thats not the correct key")
         exit_program()
 
+
 def mode_question():
     question_mode = input("Do you want to use simple mode, advanced"
-                          +" mode or quit [s/a/q]?")
-    
+                          + " mode or quit [s/a/q]?")
+
     if question_mode == "s":
         simple_mode()
-    elif question_mode =="a":
+    elif question_mode == "a":
         advanced_mode()
     elif question_mode == "q":
         exit_program()
     elif question_mode != "s" or "a" or "q":
         mode_question()
 
+
 def new_test_question():
     question_simple = input("\nDo you want to test another one [y/n]?\n")
 
     if question_simple == "n":
         exit_program()
-    elif question_simple =="y":
+    elif question_simple == "y":
         mode_question()
     elif question_simple != "n" or "y":
         print("Sorry, I dont know that key...", flush=True)
         new_test_question()
-        
 
 
 def simple_mode():
@@ -185,7 +204,7 @@ def simple_mode():
     was passed or not. In addition it invites the user to check
     another password and to maybe change the feedback modes.
     """
-    print("You selected easy mode")
+    print("You selected simple mode")
     get_password()
     hash_password()
     check_password_frequency()
@@ -261,7 +280,7 @@ def main_menu():
     second_item = FunctionItem("Advanced Feedback Mode",
                                advanced_mode)
     third_item = FunctionItem("RTFM [Read The Friendly Manual]",
-                              input, ["Enter an input"])
+                              show_manual)
     fourth_item = FunctionItem("Quit", exit_program)
 
     menu.append_item(first_item)
