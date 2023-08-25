@@ -161,19 +161,23 @@ def simple_mode():
     easy_question = input("\nDo you want to test another one [y/n]?\n")
 
     if easy_question.strip() == "y":
-        easy_mode_question = input("\nDo you want to use easy or" +
-                                   " advanced mode [e/a] ?\n")
+        easy_mode_question = input("\nDo you want to use easy mode, " +
+                                   " advanced mode [e/a/q] ?"
+                                   + "or quit?\n")
         if easy_mode_question.strip() == "e":
             clear_screen()
             simple_mode()
         elif easy_mode_question.strip() == "a":
             clear_screen()
             advanced_mode()
-        elif easy_mode_question.strip != "e" or "a":
+        elif easy_mode_question.strip == "q":
             clear_screen()
-            print("Sorry, thats no answer. I will send you to the main menu" +
-                  " in 3 seconds!", flush=True)
+            print("Okay, have anice day and see you soon!", flush=True)
             sleep(3)
+        elif easy_mode_question != "e" or "a" or "q":
+            easy_mode_question = input("\nDo you want to use easy mode," +
+                                   " advanced mode [e/a/q]"
+                                   + " or quit?\n")
     else:
         main_menu()
 
@@ -262,7 +266,7 @@ def main_menu():
     Constructs the main menu and displays it.
     """
     menu = ConsoleMenu("Welcome to Precious Password!",
-                       "Please select an option and type your password" +
+                       "Please type an option and type your password" +
                        " when prompted!", show_exit_option=False)
     menu_item = MenuItem("Menu Item")
     first_item = FunctionItem("Simple Feedback Mode",
