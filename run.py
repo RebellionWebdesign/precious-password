@@ -133,6 +133,50 @@ def check_password_complexity(*string):
 
     return True
 
+def exit_program():
+    """
+    The consolemenu library doesnt provide an interface for printing a
+    message when the user quits. So this is a basic custom function to
+    do so. 
+    """
+    exit_question = input("\nAre you sure you want to quit [y/n]?\n")
+
+    if exit_question == "y":
+        print("\nOkay, have anice day and see you soon :-)", flush=True)
+        sleep(3)
+        main()
+    elif exit_question == "n":
+        print("\nOkay, have anice day and see you soon :-)", flush=True)
+        main()
+    elif exit_question != "y" or "n":
+        print("\nSorry, thats not the correct key")
+        exit_program()
+
+def mode_question():
+    question_mode = input("Do you want to use simple mode, advanced"
+                          +" mode or quit [s/a/q]?")
+    
+    if question_mode == "s":
+        simple_mode()
+    elif question_mode =="a":
+        advanced_mode()
+    elif question_mode == "q":
+        exit_program()
+    elif question_mode != "s" or "a" or "q":
+        mode_question()
+
+def new_test_question():
+    question_simple = input("\nDo you want to test another one [y/n]?\n")
+
+    if question_simple == "n":
+        exit_program()
+    elif question_simple =="y":
+        mode_question()
+    elif question_simple != "n" or "y":
+        print("Sorry, I dont know that key...", flush=True)
+        new_test_question()
+        
+
 
 def simple_mode():
     """
@@ -158,28 +202,7 @@ def simple_mode():
               " one special character!]")
     check_password_database()
 
-    easy_question = input("\nDo you want to test another one [y/n]?\n")
-
-    if easy_question.strip() == "y":
-        easy_mode_question = input("\nDo you want to use easy mode, " +
-                                   " advanced mode [e/a/q] ?"
-                                   + "or quit?\n")
-        if easy_mode_question.strip() == "e":
-            clear_screen()
-            simple_mode()
-        elif easy_mode_question.strip() == "a":
-            clear_screen()
-            advanced_mode()
-        elif easy_mode_question.strip == "q":
-            clear_screen()
-            print("Okay, have anice day and see you soon!", flush=True)
-            sleep(3)
-        elif easy_mode_question != "e" or "a" or "q":
-            easy_mode_question = input("\nDo you want to use easy mode," +
-                                   " advanced mode [e/a/q]"
-                                   + " or quit?\n")
-    else:
-        main_menu()
+    new_test_question()
 
 
 def advanced_mode():
@@ -211,24 +234,7 @@ def advanced_mode():
               " one special character!]")
 
     check_password_database()
-    advanced_question = input("\nDo you want to test another one [y/n]?\n")
-
-    if advanced_question.strip() == "y":
-        advanced_mode_question = input("Do you want to use easy or" +
-                                       " advanced mode [e/a] ?\n")
-        if advanced_mode_question.strip() == "e":
-            clear_screen()
-            simple_mode()
-        elif advanced_mode_question.strip() == "a":
-            clear_screen()
-            advanced_mode()
-        elif advanced_mode_question.strip != "e" or "a":
-            clear_screen()
-            print("Sorry, thats no answer. I will send you to the main menu" +
-                  " in 3 seconds!", flush=True)
-            sleep(3)
-    else:
-        main_menu()
+    new_test_question()
 
 
 def clear_screen():
@@ -240,25 +246,6 @@ def clear_screen():
         _ = system("cls")
     else:
         _ = system("clear")
-
-
-def exit_program():
-    """
-    The consolemenu library doesnt provide an interface for printing a
-    message when the user quits. So this is a basic custom function to
-    do so. 
-    """
-    exit_question = input("\nAre you sure you want to quit [y/n]?\n")
-
-    if exit_question == "y":
-        print("\n Okay, have anice day and see you soon :-)", flush=True)
-        sleep(3)
-        main()
-    elif exit_question == "n":
-        main()
-    elif exit_question != "y" or "n":
-        print("\nSorry, thats not the correct key")
-        exit_program()
 
 
 def main_menu():
