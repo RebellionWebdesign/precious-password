@@ -39,6 +39,7 @@ pwc_instance = PasswordCheck("", "", "", "NO", "", "")
 
 
 def back_to_main():
+    """Sends the user back to the main menu after reading the manual"""
     check_button = input("Press ENTER to go back to the main menu!")
 
     if check_button == "":
@@ -49,6 +50,7 @@ def back_to_main():
 
 
 def show_manual():
+    """Shows the manual if the user wishes to read it"""
     manual_open = open("manual.txt", "r")
     manual_read = manual_open.read()
     manual_open.close()
@@ -179,6 +181,8 @@ def exit_program():
 
 
 def mode_question():
+    """Asks the user if the program mode should be changed.
+        Loops until an answer is given."""
     question_mode = input("Do you want to use simple mode, advanced"
                           + " mode or quit [s/a/q]?")
 
@@ -193,6 +197,8 @@ def mode_question():
 
 
 def new_test_question():
+    """Asks the user if he wants to test another password.
+        Loops until an answer is is given."""
     question_simple = input("\nDo you want to test another one [y/n]?\n")
 
     if question_simple == "n":
