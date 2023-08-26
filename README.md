@@ -4,6 +4,16 @@ Precious Password is a practical use app that is capable of taking a user define
 
 You can use the live app [here](https://precious-password-2beae8772161.herokuapp.com/)
 
+## HOW TO USE THE APP
+
+- Go to the live app following this link: [Precious Password Live](https://precious-password-2beae8772161.herokuapp.com/)
+
+- If the program doesn't start automatically, press the "RUN PROGRAM" button 
+
+- Choose between Simple Feedback Mode, Advanced Feedback Mode or read the manual first.
+
+- Type in a password of your choosing following the prompts and see how safe your password is. 
+
 ## USER STORIES
 
 ### USER GOALS (US1-PP3):
@@ -14,15 +24,41 @@ You can use the live app [here](https://precious-password-2beae8772161.herokuapp
 
 ## FEATURES
 
-|        Feature         | Solves US (if applicable) |
-| :--------------------: | :-----------------------: |
-| Display welcome screen |            --             |
-|     Guide the user     |            --             |
-|                        |                           |
-|                        |                           |
-|                        |                           |
+- **THE WELCOME SCREEN**
 
+  Upon load the program displays a friendly welcome screen which invites the user to select a menu option and follow the prompt.
 
+  - [The Welcome Screen](https://github.com/RebellionWebdesign/precious-password/blob/3558a6e5a75d51e41c6d9127cfaa732663a1bf55/docs/readme-images/screenshots/precious-password-welcome-screen.png)
+
+- **WHEN THE USER CHOOSES SIMPLE FEEDBACK MODE**
+
+  When choosing simple mode the user gets a confirmation on which mode was chosen and a prompt to type in a password.
+
+  - [Simple Mode Start Screen](docs/readme-images/screenshots/precious-password-simple-mode.png)
+  
+- **WHEN THE USER TYPES A PASSWORD**
+
+  In the next step the user types in a password and starts the program. The program analyzes the password and gives the user visual feedback on password frequency, complexity and if the password was part of a data breach or nor not. To aid the user visually, undesirable outcomes have a red background and desirable outcomes have a green background.
+  
+    - [Simple Mode With Red Text](docs/readme-images/screenshots/precious-password-simple-mode-red.png)
+
+  - [Simple Mode With Green Text](docs/readme-images/screenshots/precious-password-simple-mode-green.png)
+  
+  
+  
+  After the password is analyzed the user gets asked if there is another password to test. When the user selects yes, the program asks if the user wants to change the mode. Here the user can select **s** for **simple mode**, **a** for **advanced mode** and **q** to **quit**.
+  
+  - [Mode Change Question](docs/readme-images/screenshots/precious-password-simple-mode-green-with-questions.png)
+  
+  
+  
+  If the user wishes to quit, a friendly good bye message gets displayed and the program reloads.
+  
+  - [The User Quits](docs/readme-images/screenshots/precious-password-simple-mode-quit.png)
+  
+  
+  
+  If the user decides to select the advanced mode, this can be done seamlessly by just selecting the option.
 
 ## DESIGN
 
