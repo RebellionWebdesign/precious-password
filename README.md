@@ -115,7 +115,7 @@ The code was entirely written using [Python 3.11.4](https://www.python.org/) wit
 
 ## TESTING
 
-For the test results please refer to the TESTING.md file.
+For the test results please refer to the [TESTING.md](docs/readme-images/screenshots/heroku-live-link.png) file.
 
 ## DEPLOYMENT
 
@@ -182,13 +182,16 @@ You can also have a copy of the program on your local machine. It will work with
 
 ## FUTURE IMPROVEMENTS
 
-- *Check the OS and use different code for the menu part.* The reason for this is being discussed under TECHNOLOGIES > IMPORTANT NOTE
 - *Add the ability to use the PasswordCheck class for multiple requests.* Since we have a class we can use instances of the class for storing multiple passwords and their corresponding datasets.
-- *Make the program modular.* This means to move the program functions to separate files (e.g. functions.py etc.) and keep the run.py file uncluttered. 
+- *Make the program modular.* This means to move the program functions to separate files (e.g. functions.py etc.) and keep the run.py file uncluttered.
+- Refactor the main menu code to be more efficient.
+- Make the functions talk to each other rather than using the PasswordCheck class for getting data.
 
 ## CREDITS
 
 Credits go the developers who built the used libraries. Usually these are developed by teams, so you can have a look at the developers from the links in TECHNOLOGIES.
+
+Credits for the [passwords list](https://github.com/danielmiessler/SecLists/blob/master/Passwords/Common-Credentials/10k-most-common.txt) go to [Daniel Miessler](https://github.com/danielmiessler)
 
 ## SAYING THANKS
 
