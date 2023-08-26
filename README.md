@@ -1,4 +1,4 @@
-![precious-password-readme-banner](assets/readme-images/pp3-readme-banner.png)
+![precious-password-readme-banner](docs/readme-images/img/pp3-readme-banner.png)
 
 Precious Password is a practical use app that is capable of taking a user defined password and to check if the password meets the requirements for safe passwords.
 
@@ -30,11 +30,15 @@ You can use the live app [here](https://precious-password-2beae8772161.herokuapp
 
   - [The Welcome Screen](https://github.com/RebellionWebdesign/precious-password/blob/3558a6e5a75d51e41c6d9127cfaa732663a1bf55/docs/readme-images/screenshots/precious-password-welcome-screen.png)
 
+  
+
 - **WHEN THE USER CHOOSES SIMPLE FEEDBACK MODE**
 
   When choosing simple mode the user gets a confirmation on which mode was chosen and a prompt to type in a password.
 
   - [Simple Mode Start Screen](docs/readme-images/screenshots/precious-password-simple-mode.png)
+  
+  
   
 - **WHEN THE USER TYPES A PASSWORD**
 
@@ -52,13 +56,29 @@ You can use the live app [here](https://precious-password-2beae8772161.herokuapp
   
   
   
-  If the user wishes to quit, a friendly good bye message gets displayed and the program reloads.
+  If the user wishes to quit, a friendly good bye message gets displayed and the program reloads after three seconds.
   
   - [The User Quits](docs/readme-images/screenshots/precious-password-simple-mode-quit.png)
   
   
   
-  If the user decides to select the advanced mode, this can be done seamlessly by just selecting the option.
+  *If the user decides to select the advanced mode, this can be done seamlessly by selecting the option. **Advanced Feedback Mode does the same as Simple Feedback Mode but adds additional information on the password** like the resulting SHA-1 checksum and how it gets divided into the prefix and the suffix. Because both modes are similar and work the same we won´t go over the advanced mode in detail.*
+  
+  - [The Advanced Mode With Extra Info](docs/readme-images/screenshots/precious-password-advanced-mode-with-extra-info.png)
+  
+  
+
+- **WHEN THE USER CHOOSES RTFM (READ THE FRIENDLY MANUAL)**
+
+  If the user decides to read the manual by selecting the corresponding menu option the maual will get displayed. The user needs to scroll up a bit to read the complete text which explains what the program does and what the user has to do along with a link to the pwned passwords website documentation and a link to this repository if the user wants to study the code. When the user is done reading pressing enter will send the user back to the main menu.
+
+  - [The Manual Screen](docs/readme-images/screenshots/precious-password-rtfm.png)
+
+  
+
+- **WHEN THE USER CHOOSES TO QUIT FROM THE MAIN MENU**
+
+  It is possible to quit the program from the main menu. If the user decides to quit the program will also ask for confirmation and if the user chooses yes, the program will reload.
 
 ## DESIGN
 
@@ -68,7 +88,7 @@ There isn't not much design involved in this project. The main website uses the 
 
 ### PREVIS
 
-Wireframes are not involved here, but there is a flowchart for the general program flow
+Wireframes are not involved here, but there are flowcharts for the general program flow and how the functions work in the testing section.
 
 ### CODING
 
@@ -78,31 +98,20 @@ The project was realized with the following tools:
 - The [Python extension](https://marketplace.visualstudio.com/items?itemName=ms-python.python) with [autopep8](https://marketplace.visualstudio.com/items?itemName=ms-python.autopep8) for Visual Studio Code
 - The [Code Institute PEP8 code validator](https://pep8ci.herokuapp.com/) for error scanning
 
-### TECHNOLOGIES
+### LANGUAGES AND LIBRARIES
 
 The code was entirely written using [Python 3.11.4](https://www.python.org/) with the following libraries:
 
 - [Hashlib](https://pypi.org/project/hashlib/) for generating SHA-1 checksums
-
 - [Requests](https://pypi.org/project/requests/) for handling the GET-request to the pwned password api
-
 - [Re](https://docs.python.org/3/library/re.html) for using regex incantations
-
 - [Colorama](https://pypi.org/project/colorama/) for colorful terminal output
-
-- [Pyfiglet](https://pypi.org/project/pyfiglet/) for the ascii banner
-
-- sleep() imported from [Time](https://pypi.org/project/python-time/) to add slight delays
-
-- [Simple Term Menu](https://pypi.org/project/simple-term-menu/) for the interactive menu
-
-#### IMPORTANT NOTE:
-
-*The menu part of the program will not work using Windows, because the Simple Term Menu does not work on windows. The program was developed on Archlinux. There are workarounds to overcome this like installing a [WSL terminal](https://github.com/IngoMeyer441/simple-term-menu/issues/5) but we wont go over the steps because they are out of scope for this readme. However, the program needs to be updated to check if the OS is windows or linux and then use a different menu like [dumb_menu](https://github.com/cornradio/dumb_menu) which works on windows. The menu part of the program will still work in the browser and on linux machines.*
+- For the addition of delays we need the ***sleep*** function which comes with [time](https://docs.python.org/3/library/time.html)
+- [Console Menu](https://pypi.org/project/console-menu/) for the interactive menu
 
 ## OTHER TOOLS
 
-No other tools were used.
+- The flowcharts were made with [draw.io](https://www.drawio.com/) - an open source flowchart design app
 
 ## TESTING
 
@@ -110,7 +119,7 @@ For the test results please refer to the TESTING.md file.
 
 ## DEPLOYMENT
 
-The app was deployed using GitHub and Heroku. GitHub acts as the version control and code repository, Heroku is the app host. To deploy a webapp like this follow these steps:
+The app was deployed using [GitHub](https://github.com/) and [Heroku](https://www.heroku.com/). GitHub acts as the version control and code repository, Heroku is the app host. To deploy a webapp like this follow these steps:
 
 - In GitHub, set up a code repository and push your code you want to deploy
 - In Heroku, select to create a new app. It is the only option you get presented if you don't have any apps yet
