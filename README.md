@@ -189,7 +189,7 @@ You can also have a copy of the program on your local machine. It will work with
 
 ## CREDITS
 
-Credits go the developers who built the used libraries. Usually these are developed by teams, so you can have a look at the developers from the links in TECHNOLOGIES.
+Credits go the developers who built the used libraries. Usually these are developed by teams, so you can have a look at the developers from the links in [TECHNOLOGIES](#technologies).
 
 Credits for the [passwords list](https://github.com/danielmiessler/SecLists/blob/master/Passwords/Common-Credentials/10k-most-common.txt) go to [Daniel Miessler](https://github.com/danielmiessler)
 
