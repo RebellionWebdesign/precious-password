@@ -122,12 +122,29 @@ For the test results please refer to the TESTING.md file.
 The app was deployed using [GitHub](https://github.com/) and [Heroku](https://www.heroku.com/). GitHub acts as the version control and code repository, Heroku is the app host. To deploy a webapp like this follow these steps:
 
 - In GitHub, set up a code repository and push your code you want to deploy
-- In Heroku, select to create a new app. It is the only option you get presented if you don't have any apps yet
-- Connect your GitHub account using the "Deploy" from tab within the new app you created - you need to follow the prompts
+
+  - [Example Repository](docs/readme-images/screenshots/github-repo.png)
+
+- In Heroku, select "New" to create a new app. It is the only option you get presented if you don't have any apps yet.
+
+  If you already have an app, the button will be in the upper right corner. 
+
+  - [Add New App](docs/readme-images/screenshots/heroku-new.png)
+
+- Then give the app a name and select your country and press "Create app"
+
+  - [Create App](docs/readme-images/screenshots/heroku-name-and-country.png)
+
+- Connect your GitHub account using the "Deployment method" button within the new app you created - you need to follow the prompts
+  - [Connect to GitHub](docs/readme-images/screenshots/heroku-github-connect.png)
 - Go to the Settings tab and press the "Reveal Config Vars" button and enter the Key "PORT" with the value "8000" - this step is mandatory
+  - [Config Vars](docs/readme-images/screenshots/heroku-config-vars.png)
 - Head down to the build packs and add the python and the nodejs buildpack
+  - [Build Packs](docs/readme-images/screenshots/heroku-build-packs.png)
 - Back to the Deploy tab you can now choose to build the app either automatic or manual - I chose manual
-- The app gets built and you can access it through the link the Heroku websie provides
+  - [Deploy on Heroku](docs/readme-images/screenshots/heroku-deploy.png)
+- The app gets built and you can access it through the link the Heroku website provides
+  - [Live Link](docs/readme-images/screenshots/heroku-live-link.png)
 
 ## LOCAL DEPLOYMENT
 
