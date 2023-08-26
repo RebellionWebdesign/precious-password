@@ -184,7 +184,6 @@ You can also have a copy of the program on your local machine. It will work with
 
 ## FUTURE IMPROVEMENTS
 
-- *Add the ability to use the PasswordCheck class for multiple requests.* Since we have a class we can use instances of the class for storing multiple passwords and their corresponding datasets.
 - *Make the program modular.* This means to move the program functions to separate files (e.g. functions.py etc.) and keep the run.py file uncluttered.
 - Refactor the main menu code to be more efficient.
 - Make the functions talk to each other rather than using the PasswordCheck class for getting data.
