@@ -168,7 +168,9 @@ You can also have a copy of the program on your local machine. It will work with
 
 - This will create a new virtual environment for you. Now you need to activate it:
 
-  `source venv/bin/activate`
+  `source venv/bin/activate` on Linux
+
+  `venv/Scripts/activate` on Windows
 
 - Next you will need to install the dependencies using pip, to do so type in the terminal:
 
