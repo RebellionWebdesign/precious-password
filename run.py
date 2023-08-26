@@ -133,6 +133,7 @@ def check_password_database():
 
     if pwc_instance.pw_suffix in stripped_request:
         print(Back.RED + "Seems like the password was exposed before.")
+        pwc_instance.pw_in_db = "YES"
     else:
         print(Back.GREEN + "Password doesnt seem to be in the database")
 
