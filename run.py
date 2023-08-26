@@ -128,6 +128,9 @@ def check_password_database():
     stripping_regex = r":.*"
     stripped_request = re.sub(stripping_regex, "", request.text)
 
+    if request.status_code == 404:
+        print(Back.GREEN + "Password doesnt seem to be in the database")
+
     if pwc_instance.pw_suffix in stripped_request:
         print(Back.RED + "Seems like the password was exposed before.")
     else:
